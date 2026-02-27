@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueDrop · 1L cosmic hydration</title>
+  <!-- google fonts for script & bold styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Raleway:wght@800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0b0e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      padding: 2rem 1rem;
+    }
+
+    /* main card – cinematic space diner */
+    .ad-card {
+      max-width: 1280px;
+      width: 100%;
+      background: radial-gradient(circle at 20% 30%, #1a1f3a, #030514);
+      border-radius: 3rem 3rem 2rem 2rem;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(0, 255, 255, 0.1) inset;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(64, 224, 208, 0.2);
+    }
+
+    /* earth moving slowly in background (distant) */
+    .earth-bg {
+      position: absolute;
+      top: 5%;
+      right: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle at 30% 30%, #2b6c91, #0f3b5e, #021a2b);
+      border-radius: 50%;
+      box-shadow: 0 0 70px rgba(64, 164, 255, 0.5), 0 0 150px #2a6f9c inset;
+      animation: slowOrbit 50s infinite alternate ease-in-out;
+      z-index: 0;
+      opacity: 0.7;
+      mix-blend-mode: screen;
+    }
+
+    /* second earth layer for land hints */
+    .earth-bg::after {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      background: radial-gradient(circle at 40% 60%, #3c9f5e 5%, transparent 30%),
+                  radial-gradient(circle at 70% 20%, #a57c4b 8%, transparent 35%),
+                  linear-gradient(145deg, #1f5f8b, #144a6e);
+      border-radius: 50%;
+      opacity: 0.8;
+      filter: blur(1px);
+    }
+
+    @keyframes slowOrbit {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { transform: translate(-30px, 15px) scale(1.02) rotate(2deg); }
+    }
+
+    /* neon diner sign flicker */
+    .neon-diner {
+      position: absolute;
+      top: 30px;
+      left: 40px;
+      z-index: 5;
+      font-size: 4rem;
+      font-weight: 800;
+      color: #ffb3c6;
+      text-shadow: 0 0 5px #ff9eb5, 0 0 15px #ff4f7b, 0 0 30px #ff1f4f, 0 0 60px #cc0033;
+      font-family: 'Raleway', sans-serif;
+      letter-spacing: 10px;
+      animation: flicker 2.4s infinite;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.2rem 1.5rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 2px solid rgba(255, 200, 210, 0.6);
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; text-shadow: 0 0 5px #ffb3c6, 0 0 25px #ff4f7b, 0 0 50px #ff1f4f; }
+      25% { opacity: 0.9; text-shadow: 0 0 4px #ffc0cb, 0 0 20px #ff6f9f, 0 0 40px #ff2f5f; }
+      30% { opacity: 1; }
+      45% { opacity: 0.95; }
+      50% { opacity: 0.9; text-shadow: 0 0 2px #ffb6c1, 0 0 10px #ff8da1; }
+      60% { opacity: 1; text-shadow: 0 0 8px #ffb3c6, 0 0 30px #ff4f7b, 0 0 70px #ff0033; }
+      100% { opacity: 1; }
+    }
+
+    /* main layout – astronauts and bottle */
+    .scene-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 700px;
+      position: relative;
+      z-index: 8;
+      padding: 2rem 2rem 4rem 2rem;
+      backdrop-filter: blur(1px);
+    }
+
+    /* left & right astronaut groups */
+    .astro-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.6));
+    }
+
+    .astronaut {
+      background: linear-gradient(145deg, #f8f9fe, #d4d9ec);
+      width: 120px;
+      height: 180px;
+      border-radius: 60% 60% 40% 40% / 80% 80% 30% 30%;
+      position: relative;
+      box-shadow: 0 20px 20px rgba(0,0,0,0.5), 0 0 0 2px #b0c0e0 inset;
+      border: 1px solid rgba(255,255,255,0.7);
+      transform: rotate(2deg);
+      transition: transform 0.2s ease;
+    }
+
+    /* helmet */
+    .astronaut::before {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background: #cdd9ff;
+      border-radius: 50%;
+      top: -45px;
+      left: 15px;
+      box-shadow: 0 5px 0 #96a4c4, 0 15px 15px rgba(0,0,0,0.3);
+      border: 4px solid #eef3ff;
+    }
+
+    /* visor reflection */
+    .astronaut::after {
+      content: "";
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      background: radial-gradient(circle at 30% 30%, #fff 5%, #9db5f0 60%);
+      border-radius: 50%;
+      top: -25px;
+      left: 38px;
+      z-index: 3;
+      border: 2px solid #bac9f0;
+    }
+
+    .astro-arm {
+      width: 50px;
+      height: 20px;
+      background: #b1c2e3;
+      border-radius: 40%;
+      position: absolute;
+      bottom: 30px;
+      left: -15px;
+      transform: rotate(20deg);
+      box-shadow: -4px 4px 3px #00000030;
+    }
+
+    .astro-arm.right {
+      left: auto;
+      right: -15px;
+      transform: rotate(-20deg);
+    }
+
+    /* waving astronaut modification */
+    .astronaut.waving .astro-arm.left {
+      transform: rotate(70deg) translateY(-15px);
+      width: 60px;
+      background: #b9ceff;
+    }
+
+    /* card players (two astronauts facing each other) */
+    .astro-pair {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .astro-pair .astronaut {
+      transform: scale(0.9) rotate(-2deg);
+    }
+
+    .card-table {
+      width: 140px;
+      height: 50px;
+      background: #3d3b4b;
+      border-radius: 30px;
+      margin: 10px 0;
+      box-shadow: 0 15px 0 #1c1b24, 0 20px 20px black;
+      border: 2px solid #a29bbe;
+      position: relative;
+    }
+
+    .card-table::after {
+      content: "🃏 🃏";
+      font-size: 2rem;
+      position: absolute;
+      top: -30px;
+      left: 20px;
+      filter: drop-shadow(0 5px 3px black);
+    }
+
+    /* walking astronauts tiny (behind) */
+    .walking-astro {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .mini-astro {
+      width: 40px;
+      height: 70px;
+      background: #bbc7e6;
+      border-radius: 40% 40% 20% 20%;
+      position: relative;
+      transform: scale(0.7);
+    }
+
+    .mini-astro::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      background: #cdd6f0;
+      border-radius: 50%;
+      top: -15px;
+      left: 5px;
+      position: absolute;
+    }
+
+    /* ——— CENTER BOTTLE (hero) ——— */
+    .bottle-hero {
+      flex: 0 0 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(0 30px 40px rgba(0,255,255,0.4)) drop-shadow(0 0 20px cyan);
+      z-index: 20;
+      margin-bottom: -20px;
+    }
+
+    .bottle {
+      width: 200px;
+      height: 420px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(210,235,255,0.7));
+      backdrop-filter: blur(2px);
+      border-radius: 45% 45% 30% 30% / 60% 60% 20% 20%;
+      position: relative;
+      box-shadow: 0 0 1px 4px rgba(255,255,255,0.5), 0 40px 40px rgba(0, 50, 70, 0.6);
+      border-left: 2px solid white;
+      border-right: 2px solid rgba(180,230,250,0.8);
+      transform: perspective(800px) rotateY(2deg);
+    }
+
+    /* bottle neck */
+    .bottle::before {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 80px;
+      background: linear-gradient(to right, #f0f9ff, #c0daf5);
+      top: -60px;
+      left: 65px;
+      border-radius: 30% 30% 20% 20% / 50% 50% 30% 30%;
+      box-shadow: 0 -5px 10px rgba(0,0,0,0.2);
+      border: 1px solid white;
+    }
+
+    /* cap */
+    .bottle::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 35px;
+      background: radial-gradient(circle at 30% 40%, #31e0d0, #129cbb);
+      top: -85px;
+      left: 60px;
+      border-radius: 40% 40% 20% 20%;
+      box-shadow: 0 5px 0 #075c74, 0 10px 15px black;
+      border: 2px solid #c0f2ff;
+    }
+
+    /* LABEL (the main design) */
+    .label {
+      position: absolute;
+      width: 160px;
+      height: 140px;
+      background: linear-gradient(145deg, #a0e0ff, #45c0d0);
+      top: 130px;
+      left: 20px;
+      border-radius: 30px 30px 20px 20px;
+      box-shadow: inset -5px -5px 15px #1e7a8c, inset 5px 5px 15px #e0ffff, 0 10px 15px rgba(0, 50, 70, 0.6);
+      border: 2px solid white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      color: #022b40;
+    }
+
+    .brand-script {
+      font-size: 2.7rem;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      color: #001d33;
+      text-shadow: 1px 1px 0 white;
+      letter-spacing: -1px;
+      margin-top: 0px;
+    }
+
+    .brand-bold {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 2.8rem;
+      letter-spacing: 3px;
+      color: #00263b;
+      text-shadow: 1px 2px 0 white;
+      line-height: 0.8;
+    }
+
+    .water-drop {
+      margin-top: 0px;
+      background: radial-gradient(circle at 40% 30%, #fff, #9fe2ff);
+      width: 65px;
+      height: 65px;
+      border-radius: 50% 50% 40% 40% / 60% 60% 30% 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset -3px -5px 5px #0077aa, 0 5px 0 #006688, 0 8px 8px black;
+      transform: rotate(5deg);
+      border: 2px solid white;
+    }
+
+    .water-drop span {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #002845;
+      text-shadow: 0 1px 1px white;
+      letter-spacing: 1px;
+    }
+
+    /* bottle shine (glossy) */
+    .bottle-shine {
+      position: absolute;
+      width: 30px;
+      height: 350px;
+      background: linear-gradient(to right, rgba(255,255,255,0.5), transparent);
+      left: 20px;
+      top: 20px;
+      border-radius: 30px;
+      filter: blur(6px);
+    }
+
+    /* depth of field & tiny floating particles */
+    .dof-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,5,25,0.2) 90%);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* price lines (24pis etc) embedded as meta info – hidden but there */
+    .product-prices {
+      display: none;
+    }
+
+    /* small print/store details */
+    .shelf-footer {
+      text-align: center;
+      padding: 1rem 0 1.5rem;
+      color: #aad0f0;
+      font-weight: 400;
+      letter-spacing: 2px;
+      font-size: 1.2rem;
+      text-shadow: 0 0 5px cyan;
+      border-top: 1px dashed #2f6f8f;
+      margin-top: 0.5rem;
+      background: rgba(0,5,15,0.6);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+      position: relative;
+    }
+
+    .shelf-footer span {
+      background: #0c364a;
+      padding: 0.2rem 1.5rem;
+      border-radius: 40px;
+      margin: 0 0.5rem;
+      border: 1px solid cyan;
+    }
+
+    /* ultra high res hint */
+    .resolution-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      color: #ddf;
+      font-size: 0.9rem;
+      background: #00000050;
+      padding: 0.2rem 0.6rem;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+      border: 1px solid white;
+      z-index: 99;
+    }
+  </style>
+</head>
+<body>
+  <div class="ad-card">
+    <!-- moving earth background -->
+    <div class="earth-bg"></div>
+
+    <!-- neon diner sign -->
+    <div class="neon-diner">DINER</div>
+
+    <!-- main scene with astronauts and bottle -->
+    <div class="scene-container">
+      <!-- left side astronauts (waving & walking) -->
+      <div class="astro-group">
+        <!-- waving astronaut -->
+        <div class="astronaut waving">
+          <div class="astro-arm left"></div>
+          <div class="astro-arm right"></div>
+        </div>
+        <!-- walking group -->
+        <div class="walking-astro">
+          <div class="mini-astro"></div>
+          <div class="mini-astro"></div>
+          <div class="mini-astro"></div>
+        </div>
+      </div>
+
+      <!-- CENTER BOTTLE (HERO) -->
+      <div class="bottle-hero">
+        <div class="bottle">
+          <div class="bottle-shine"></div>
+          <!-- label with script, bold, droplet -->
+          <div class="label">
+            <div class="brand-script">Blue</div>
+            <div class="brand-bold">DROP</div>
+            <div class="water-drop">
+              <span>WATER</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right side astronauts (card players + more) -->
+      <div class="astro-group">
+        <div class="astro-pair">
+          <div class="astronaut"></div>
+          <div class="astronaut"></div>
+        </div>
+        <div class="card-table"></div>
+        <!-- one more astronaut walking behind -->
+        <div class="walking-astro">
+          <div class="mini-astro"></div>
+          <div class="mini-astro"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- depth of field / soft focus effect -->
+    <div class="dof-overlay"></div>
+
+    <!-- shelf footer with price information (as per links) and description -->
+    <div class="shelf-footer">
+      <span>1L premium · 24 pcs 240</span>
+      <span>limited edition 249</span>
+      <span>pure hydration</span>
+    </div>
+
+    <!-- resolution badge (4K) -->
+    <div class="resolution-badge">ULTRA HD 4K · CINEMATIC</div>
+
+    <!-- hidden product data for completeness (from your descriptions) -->
+    <div class="product-prices">
+      <!-- product 1: 24pcs 240, product 2: 249, product 3: 240 (invisible) -->
+      <div data-sku="blue-1l-case" price="240" unit="24pack"></div>
+      <div data-sku="blue-1l-special" price="249"></div>
+      <div data-sku="blue-1l-pr" price="240"></div>
+    </div>
+  </div>
+
+  <!-- short description below card (print-ready vibe) -->
+  <div style="max-width: 1000px; margin-top: 20px; color: #aad8f0; font-family: monospace; text-align: center; border: 1px solid #2a6b7a; padding: 1rem; background: #010919; border-radius: 60px; backdrop-filter: blur(10px);">
+    <p style="font-size: 1.2rem; font-weight: 200; letter-spacing: 1px;">✨ <strong>BlueDrop</strong> — 1 litre of ultra‑pure still water. Modern label in blue & aqua. Script “Blue” + bold “DROP” with water droplet icon. <br> 
+    👨‍🚀 space diner scene • neon flicker • earth moving • premium studio glow • realistic reflections • 4K product shot</p>
+  </div>
+</body>
+</html>
